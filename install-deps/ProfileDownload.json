@@ -1,0 +1,20 @@
+[
+    {
+        "psVersion": "5.1",
+        "psEdition": "Desktop",
+        "psPlatform": null,
+        "profileDownloadUri": "https://raw.githubusercontent.com/Smalls1652/My-PowerShell-Profiles/master/profiles/PowerShell-5_1/Windows_Profile.ps1"
+    },
+    {
+        "psVersion": "7.0",
+        "psEdition": "Core",
+        "psPlatform": "Win32NT",
+        "profileDownloadUri": "https://raw.githubusercontent.com/Smalls1652/My-PowerShell-Profiles/master/profiles/PowerShell-7/Windows_Profile.ps1"
+    },
+    {
+        "psVersion": "7.0",
+        "psEdition": "Core",
+        "psPlatform": "Unix",
+        "profileDownloadUri": "https://raw.githubusercontent.com/Smalls1652/My-PowerShell-Profiles/master/profiles/PowerShell-7/macOS-Linux_Profile.ps1"
+    }
+]
