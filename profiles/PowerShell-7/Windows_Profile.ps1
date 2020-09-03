@@ -1,7 +1,7 @@
 <#
 # Smalls_Microsoft.PowerShell.7.0.0_Profile
 ## Platform: Windows
-## Version: 2020.09.00
+## Version: 2020.09.01
 #>
 
 function Prompt {
@@ -48,4 +48,16 @@ function Prompt {
 
     "${promptText} "
 
+}
+
+#Import profile functions if the folder exists in the profile's directory
+$profileFunctionsFolder = [System.IO.Path]::Combine($PSScriptRoot, "profile-functions")
+
+switch (Test-Path -Path $profileFunctionsFolder) {
+    $true {
+        $profileFunctions = Get-ChildItem -Path $profileFunctionsFolder -Recurse | Where-Object { $PSItem.Extension -eq ".ps1" }
+        foreach ($func in $profileFunctions) {
+            . "$($func.FullName)"
+        }
+    }
 }

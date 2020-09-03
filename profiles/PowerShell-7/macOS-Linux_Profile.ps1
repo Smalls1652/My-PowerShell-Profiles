@@ -2,7 +2,7 @@
 # Smalls_Microsoft.PowerShell.7.0.0_Profile
 ## Platform: macOS/Linux
 ## PowerShell Version: 7.0
-## Version: 2020.05.00
+## Version: 2020.09.01
 #>
 function Prompt {
     $color = @{
@@ -44,3 +44,15 @@ Set-PSReadLineOption -EditMode "Windows"
 
 #Add 'ctrl+k' as a key combo for activating 'MenuComplete'
 Set-PSReadLineKeyHandler -Function "MenuComplete" -Chord "Ctrl+k"
+
+#Import profile functions if the folder exists in the profile's directory
+$profileFunctionsFolder = [System.IO.Path]::Combine($PSScriptRoot, "profile-functions")
+
+switch (Test-Path -Path $profileFunctionsFolder) {
+    $true {
+        $profileFunctions = Get-ChildItem -Path $profileFunctionsFolder -Recurse | Where-Object { $PSItem.Extension -eq ".ps1" }
+        foreach ($func in $profileFunctions) {
+            . "$($func.FullName)"
+        }
+    }
+}
