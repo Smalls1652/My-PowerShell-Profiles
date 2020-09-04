@@ -1,7 +1,7 @@
 <#
 # Smalls_Microsoft.PowerShell.5.1.0_Profile
 ## Platform: Windows
-## Version: 2020.09.01
+## Version: 2020.09.1.1
 #>
 
 function Prompt {
