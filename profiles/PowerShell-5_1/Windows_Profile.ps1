@@ -49,8 +49,23 @@ $profileFunctionsFolder = [System.IO.Path]::Combine($PSScriptRoot, "profile-func
 switch (Test-Path -Path $profileFunctionsFolder) {
     $true {
         $profileFunctions = Get-ChildItem -Path $profileFunctionsFolder -Recurse | Where-Object { $PSItem.Extension -eq ".ps1" }
+        $functionsBefore = Get-ChildItem -Path "Function:\"
         foreach ($func in $profileFunctions) {
             . "$($func.FullName)"
         }
+        $functionsAfter = Get-ChildItem -Path "Function:\" | Where-Object { $PSItem -notin $functionsBefore }
+
+        switch (($functionsAfter | Measure-Object).Count -gt 0) {
+            $true {
+                $loadedFunctionsMsg = "Functions loaded through profile -"
+                foreach ($loadedFunction in $functionsAfter) {
+                    $loadedFunctionsMsg += "`n`t* $($loadedFunction.Name)"
+                }
+                Write-Warning $loadedFunctionsMsg
+                Write-Output ""
+                break
+            }
+        }
+        break
     }
 }
