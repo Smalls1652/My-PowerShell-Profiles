@@ -69,18 +69,18 @@ switch (Test-Path -Path $profileFunctionsFolder) {
                     $true {
                         Write-Output "$("`e[33;1m")❗❗ WARNING ❗❗"
                         Write-Output "Functions loaded through profile:"
+                        Write-Output "$("`e[0m")"
                         break
                     }
 
                     Default {
-                        Write-Output "$("`e[33;1m")WARNING: Functions loaded through profile -"
+                        Write-Warning "Functions loaded through profile -"
                         break
                     }
                 }
                 foreach ($loadedFunction in $functionsAfter) {
-                    Write-Output "* $($loadedFunction.Name)"
+                    Write-Warning "* $($loadedFunction.Name)"
                 }
-                Write-Output "$("`e[0m")"
                 break
             }
         }
